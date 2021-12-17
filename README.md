@@ -1,3 +1,7 @@
-#FIRST README FILE
-made a new read file and I have no idea of the markdown language syntax.
-**well Fuck**
+
+# first README file
+
+## markdown language is new for me.
+
+<p> regardless of everything, this new thing is kinda fun
+</p>
