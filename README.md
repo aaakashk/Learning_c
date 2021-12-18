@@ -5,3 +5,5 @@
 
 <p> regardless of everything, this new thing is kinda fun
 </p>
+<p>added split_odd_even.c
+</p>
