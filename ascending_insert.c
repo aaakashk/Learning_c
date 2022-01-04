@@ -69,7 +69,7 @@ nodetype* insert(nodetype* start, int num) {
 }
 
 void display(nodetype* start) {
-    printf("-------------------------------------------\n");
+    printf("-----------------------------------------\n");
     while (start != NULL) {
         printf("%d ", start->data);
         start = start->next;
