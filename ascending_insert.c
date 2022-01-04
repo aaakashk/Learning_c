@@ -57,12 +57,13 @@ nodetype* insert(nodetype* start, int num) {
                 s = r;
                 r = r->next;
             }
-            if (num > r->data && r->next == NULL) {
-                r->next = ptr;
-            } else {
+            if (r->next != NULL) {
                 ptr->next = s->next;
                 s->next = ptr;
-            }
+            } else if (num > r->data && r->next == NULL) {
+                r->next = ptr;
+            } else
+                printf("idek what im doing");
         }
     }
     return start;
