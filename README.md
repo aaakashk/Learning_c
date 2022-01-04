@@ -7,3 +7,5 @@
 </p>
 <p>added split_odd_even.c
 </p>
+<p>added ascending_insert.c
+</p>
