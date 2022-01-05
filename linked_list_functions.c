@@ -153,7 +153,7 @@ int is_empty(nodetype *start) {
 //delete a single node that contains the inputted number
 nodetype *delete (nodetype *start, int key) {
     nodetype *p = start, *t = start;
-    if (start->next == NULL) {
+    if (start->next == NULL && start->info == key) {
         free(p);
         start = NULL;
     } else {
