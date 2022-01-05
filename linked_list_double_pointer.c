@@ -6,12 +6,12 @@ typedef struct node {
     struct node* next;
 } nodetype;
 
-void insert(nodetype**, int);
+void insert(nodetype**);
 void display(nodetype*);
 
 int main() {
     nodetype* start = NULL;
-    int choice, number;
+    int choice;
     do {
         printf(
             "1. Insert a number.\n"
@@ -21,9 +21,7 @@ int main() {
         scanf("%d", &choice);
         switch (choice) {
             case 1:
-                printf("Enter the number: ");
-                scanf("%d", &number);
-                insert(&start, number);
+                insert(&start);
                 break;
             case 2:
                 if (start == NULL)
@@ -39,17 +37,24 @@ int main() {
     } while (1);
 }
 
-void insert(nodetype** head, int num) {
+void insert(nodetype** head) {
     nodetype* ptr = (nodetype*)malloc(sizeof(nodetype));
-    ptr->data = num;
-    ptr->next = NULL;
-    if (*head == NULL)
-        *head = ptr;
+    if (ptr == NULL)
+        printf("Not enough memory.\n");
     else {
-        nodetype* temp = *head;
-        while (temp->next != NULL)
-            temp = temp->next;
-        temp->next = ptr;
+        int num;
+        printf("Enter the number: ");
+        scanf("%d", &num);
+        ptr->data = num;
+        ptr->next = NULL;
+        if (*head == NULL)
+            *head = ptr;
+        else {
+            nodetype* temp = *head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = ptr;
+        }
     }
 }
 
