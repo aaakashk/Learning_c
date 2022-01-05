@@ -7,16 +7,18 @@ typedef struct node {
 } nodetype;
 
 void insert(nodetype**);
+void delete (nodetype**, int);
 void display(nodetype*);
 
 int main() {
     nodetype* start = NULL;
-    int choice;
+    int choice, number;
     do {
         printf(
             "1. Insert a number.\n"
-            "2. Display the list.\n"
-            "3. Exit.\n"
+            "2. Delete a number.\n"
+            "3. Display the list.\n"
+            "4. Exit.\n"
             "Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -25,11 +27,20 @@ int main() {
                 break;
             case 2:
                 if (start == NULL)
+                    printf("The list is empty. Nothing to delete.\n");
+                else {
+                    printf("Enter the number to delete: ");
+                    scanf("%d", &number);
+                    delete (&start, number);
+                }
+                break;
+            case 3:
+                if (start == NULL)
                     printf("The list is empty.\n");
                 else
                     display(start);
                 break;
-            case 3:
+            case 4:
                 exit(0);
             default:
                 printf("Wrong choice. Enter again.\n");
@@ -55,6 +66,32 @@ void insert(nodetype** head) {
                 temp = temp->next;
             temp->next = ptr;
         }
+    }
+}
+
+void delete (nodetype** head, int num) {
+    nodetype* temp = *head;
+    //single node and number found
+    if ((*head)->next == NULL && (*head)->data == num) {
+        free(temp);
+        *head = NULL;
+    } else {
+        nodetype* prev = temp;
+        while (temp->data != num && temp->next != NULL) {
+            prev = temp;
+            temp = temp->next;
+        }
+        if (temp->data == num) {
+            //number found in the first node
+            if (temp == *head)
+                *head = (*head)->next;
+            else {  //number found in between or in the end
+                printf("Deleted: %d\n", num);
+                prev->next = temp->next;
+            }
+            free(temp);
+        } else
+            printf("Number not found.\n");
     }
 }
 
