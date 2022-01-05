@@ -6,94 +6,64 @@ typedef struct node {
     struct node* next;
 } nodetype;
 
-void create(nodetype** start, int num) {
-    nodetype* ptr = (nodetype*)malloc(sizeof(nodetype));
-    ptr->data = num;
-    ptr->next = NULL;
-    if (*start == NULL)
-        *start = ptr;
-    else {
-        nodetype* temp = *start;
-        while (temp->next != NULL)
-            temp = temp->next;
-        temp->next = ptr;
-    }
-}
-
-void create_odd_even_list(nodetype** start, nodetype** odd, nodetype** even) {
-    int count = 0;
-    while (*start != NULL) {
-        count++;
-        *start = (*start)->next;
-    }
-    printf("\ncount = %d", count);
-    nodetype* temp = *start;
-    int c = 1;
-    while (temp != NULL && c <= count) {
-        if (c % 2 == 0) {
-            nodetype* ptr_even = (nodetype*)malloc(sizeof(nodetype));
-            ptr_even->data = temp->data;
-            ptr_even->next = NULL;
-            if (c == 2)
-                *even = ptr_even;
-            else {
-                nodetype* e = *even;
-                while (e->next != NULL) {
-                    e = e->next;
-                }
-                e->next = ptr_even;
-            }
-
-        } else {
-            nodetype* ptr_odd = (nodetype*)malloc(sizeof(nodetype));
-            ptr_odd->data = temp->data;
-            ptr_odd->next = NULL;
-            if (c == 1)
-                *odd = ptr_odd;
-            else {
-                nodetype* o = *odd;
-                while (o->next != NULL) {
-                    o = o->next;
-                }
-                o->next = ptr_odd;
-            }
-        }
-        c++;
-        temp = temp->next;
-    }
-}
-
-// void display_odd_even(nodetype* odd, nodetype* even) {
-//     while (odd != NULL) {
-//         printf("%d ", odd->data);
-//         odd = odd->next;
-//     }
-//     while (even != NULL) {
-//         printf("%d ", even->data);
-//         even = even->next;
-//     }
-// }
-
-void display(nodetype* start) {
-    while (start != NULL) {
-        printf("%d ", start->data);
-        start = start->next;
-    }
-}
+void insert(nodetype**);
+void display(nodetype*);
 
 int main() {
-    //int number;
-    nodetype *start = NULL, *odd = NULL, *even = NULL;
-    create(&start, 1);
-    create(&start, 2);
-    create(&start, 3);
-    create(&start, 4);
-    create(&start, 5);
-    display(start);
-    create_odd_even_list(&start, &odd, &even);
-    //display_odd_even(odd, even);
+    nodetype* start = NULL;
+    int choice, number;
+    do {
+        printf(
+            "1. Insert a number.\n"
+            "2. Display the list.\n"
+            "4. Exit.\n"
+            "Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                insert(&start);
+                break;
+            case 2:
+                if (start == NULL)
+                    printf("The list is empty.\n");
+                else
+                    display(start);
+                break;
+            case 4:
+                exit(0);
+            default:
+                printf("Wrong choice. Enter again.\n");
+        }
+    } while (1);
+}
+
+void insert(nodetype** head) {
+    nodetype* ptr = (nodetype*)malloc(sizeof(nodetype));
+    if (ptr == NULL)
+        printf("Not enough memory.\n");
+    else {
+        int num;
+        printf("Enter the number: ");
+        scanf("%d", &num);
+        ptr->data = num;
+        ptr->next = NULL;
+        if (*head == NULL)
+            *head = ptr;
+        else {
+            nodetype* temp = *head;
+            while (temp->next != NULL)
+                temp = temp->next;
+            temp->next = ptr;
+        }
+    }
+}
+
+void display(nodetype* h) {
+    printf("-------------------------------------------\n");
+    while (h != NULL) {
+        printf("%d ", h->data);
+        h = h->next;
+    }
     printf("\n");
-    display(odd);
-    printf("\n");
-    display(even);
+    printf("-------------------------------------------\n");
 }
