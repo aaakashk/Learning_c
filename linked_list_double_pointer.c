@@ -82,13 +82,12 @@ void delete (nodetype** head, int num) {
             temp = temp->next;
         }
         if (temp->data == num) {
+            printf("Deleted: %d\n", num);
             //number found in the first node
             if (temp == *head)
                 *head = (*head)->next;
-            else {  //number found in between or in the end
-                printf("Deleted: %d\n", num);
+            else  //number found in between or in the end
                 prev->next = temp->next;
-            }
             free(temp);
         } else
             printf("Number not found.\n");
