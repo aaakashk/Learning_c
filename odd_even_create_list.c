@@ -14,42 +14,45 @@ void odd_even_split(nodetype**, nodetype**, nodetype**);
 int main() {
     nodetype *start = NULL, *odd_start = NULL, *even_start = NULL;
     int choice, number;
-    display(start);
-    display(odd_start);
-    display(even_start);
-    insert(&start);
-    insert(&start);
-    insert(&start);
-    insert(&start);
-    insert(&start);
-    // do {
-    //     printf(
-    //         "1. Insert a number.\n"
-    //         "2. Display the list.\n"
-    //         "4. Exit.\n"
-    //         "Enter your choice: ");
-    //     scanf("%d", &choice);
-    //     switch (choice) {
-    //         case 1:
-    //             insert(&start);
-    //             break;
-    //         case 2:
-    //             if (start == NULL)
-    //                 printf("The list is empty.\n");
-    //             else
-    //                 display(start);
-    //             break;
-    //         case 4:
-    //             printf("Loop exitted.\n");
-    //             break;
-    //         default:
-    //             printf("Wrong choice. Enter again.\n");
-    //     }
-    // } while (1);
-    display(start);
-    odd_even_split(&start, &odd_start, &even_start);
-    display(odd_start);
-    display(even_start);
+
+    do {
+        printf(
+            "1. Insert a number.\n"
+            "2. Display the original list.\n"
+            "3. Split the list through odd and even positions and display them.\n"
+            "4. Exit.\n"
+            "Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                insert(&start);
+                break;
+            case 2:
+                if (start == NULL)
+                    printf("The list is empty.\n");
+                else
+                    display(start);
+                break;
+            case 3:
+                odd_even_split(&start, &odd_start, &even_start);
+
+                if (odd_start == NULL && even_start == NULL)
+                    printf("The original list is empty.\n");
+                if (even_start == NULL)
+                    printf("A single node present.\n");
+                printf("ODD POSITON NODE'S LIST: \n");
+                display(odd_start);
+                printf("\n");
+                printf("EVEN POSITON NODE'S LIST: \n");
+                display(even_start);
+                break;
+            case 4:
+                printf("Program terminated.\n");
+                exit(0);
+            default:
+                printf("Wrong choice. Enter again.\n");
+        }
+    } while (1);
 }
 
 void insert(nodetype** head) {
