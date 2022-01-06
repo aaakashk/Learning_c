@@ -9,13 +9,12 @@ typedef struct node {
 
 void insert(nodetype**, nodetype**);
 void display(nodetype*);
-//void count_nodes(nodetype*, int*);
 
-void sort(nodetype*, nodetype*);
+void sort(nodetype*);
 
 int main() {
     nodetype *head = NULL, *tail = NULL;
-    int choice, count = 0;
+    int choice;
     do {
         printf(
             "1. Insert a number.\n"
@@ -39,7 +38,7 @@ int main() {
                 if (head == NULL && tail == NULL)
                     printf("The list is empty.\n");
                 else {
-                    sort(head, tail);
+                    sort(head);
                     printf("The sorted list is : \n");
                     display(head);
                 }
@@ -80,22 +79,14 @@ void display(nodetype* start) {
     }
     printf("\n");
 }
-
-// void count_nodes(nodetype* h, int* c) {
-//     while (h != NULL) {
-//         (*c)++;
-//         h = h->next;
-//     }
-// }
-
-void sort(nodetype* h, nodetype* t) {
+//selection sort algo
+void sort(nodetype* h) {
     int min;
-    nodetype *i, *j, *pos;
-    i = h;
-    while (i != NULL) {
-        min = i->data;
-        pos = i;
-        j = i->next;
+    nodetype *j, *pos;
+    while (h != NULL) {
+        min = h->data;
+        pos = h;
+        j = h->next;
         while (j != NULL) {
             if (j->data < min) {
                 min = j->data;
@@ -103,10 +94,10 @@ void sort(nodetype* h, nodetype* t) {
             }
             j = j->next;
         }
-        if (pos != i) {
-            pos->data = i->data;
-            i->data = min;
+        if (pos != h) {
+            pos->data = h->data;
+            h->data = min;
         }
-        i = i->next;
+        h = h->next;
     }
 }
