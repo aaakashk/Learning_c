@@ -11,7 +11,7 @@ void insert(nodetype**, nodetype**);
 void display(nodetype*);
 //void count_nodes(nodetype*, int*);
 
-void sort(nodetype**, nodetype**);
+void sort(nodetype*, nodetype*);
 
 int main() {
     nodetype *head = NULL, *tail = NULL;
@@ -39,7 +39,7 @@ int main() {
                 if (head == NULL && tail == NULL)
                     printf("The list is empty.\n");
                 else {
-                    sort(&head, &tail);
+                    sort(head, tail);
                     printf("The sorted list is : \n");
                     display(head);
                 }
@@ -88,10 +88,10 @@ void display(nodetype* start) {
 //     }
 // }
 
-void sort(nodetype** h, nodetype** t) {
+void sort(nodetype* h, nodetype* t) {
     int min;
     nodetype *i, *j, *pos;
-    i = *h;
+    i = h;
     while (i != NULL) {
         min = i->data;
         pos = i;
