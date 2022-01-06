@@ -10,9 +10,8 @@ typedef struct node {
 void insert(nodetype**, nodetype**);
 void display(nodetype*);
 //void count_nodes(nodetype*, int*);
-int _count_nodes(nodetype*);
 
-//void sort(nodetype**, nodetype**);
+void sort(nodetype**, nodetype**);
 
 int main() {
     nodetype *head = NULL, *tail = NULL;
@@ -23,7 +22,6 @@ int main() {
             "2. Display the list.\n"
             "3. Sort the list and display.\n"
             "4. Exit.\n"
-            "5. Count the nodes.\n"
             "Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -37,18 +35,15 @@ int main() {
                     display(head);
                 }
                 break;
-            case 5:
-                printf("Count = %d\n", _count_nodes(head));
+            case 3:
+                if (head == NULL && tail == NULL)
+                    printf("The list is empty.\n");
+                else {
+                    sort(&head, &tail);
+                    printf("The sorted list is : \n");
+                    display(head);
+                }
                 break;
-            // case 3:
-            //     if (head == NULL && tail == NULL)
-            //         printf("The list is empty.\n");
-            //     else {
-            //         sort(&head, &tail);
-            //         printf("The sorted list is : \n");
-            //         display(head);
-            //     }
-            //     break;
             case 4:
                 exit(0);
             default:
@@ -93,13 +88,25 @@ void display(nodetype* start) {
 //     }
 // }
 
-int _count_nodes(nodetype* h) {
-    int count = 0;
-    while (h != NULL) {
-        count++;
-        h = h->next;
+void sort(nodetype** h, nodetype** t) {
+    int min;
+    nodetype *i, *j, *pos;
+    i = *h;
+    while (i != NULL) {
+        min = i->data;
+        pos = i;
+        j = i->next;
+        while (j != NULL) {
+            if (j->data < min) {
+                min = j->data;
+                pos = j;
+            }
+            j = j->next;
+        }
+        if (pos != i) {
+            pos->data = i->data;
+            i->data = min;
+        }
+        i = i->next;
     }
-    return count;
 }
-//void sort(nodetype** h, nodetype** t) {
-//}
