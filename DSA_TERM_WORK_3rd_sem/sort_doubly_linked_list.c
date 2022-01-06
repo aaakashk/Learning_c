@@ -9,7 +9,9 @@ typedef struct node {
 
 void insert(nodetype**, nodetype**);
 void display(nodetype*);
-void count_nodes(nodetype*, int*);
+//void count_nodes(nodetype*, int*);
+int _count_nodes(nodetype*);
+
 //void sort(nodetype**, nodetype**);
 
 int main() {
@@ -36,8 +38,7 @@ int main() {
                 }
                 break;
             case 5:
-                count_nodes(head, &count);
-                printf("Count = %d\n", count);
+                printf("Count = %d\n", _count_nodes(head));
                 break;
             // case 3:
             //     if (head == NULL && tail == NULL)
@@ -85,12 +86,20 @@ void display(nodetype* start) {
     printf("\n");
 }
 
-void count_nodes(nodetype* h, int* c) {
+// void count_nodes(nodetype* h, int* c) {
+//     while (h != NULL) {
+//         (*c)++;
+//         h = h->next;
+//     }
+// }
+
+int _count_nodes(nodetype* h) {
+    int count = 0;
     while (h != NULL) {
-        (*c)++;
+        count++;
         h = h->next;
     }
+    return count;
 }
-
 //void sort(nodetype** h, nodetype** t) {
 //}
