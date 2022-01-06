@@ -1,3 +1,5 @@
+//implement stack using single pointer in linked list
+
 #include <stdio.h>
 #include <stdlib.h>
 

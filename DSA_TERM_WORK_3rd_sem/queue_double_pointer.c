@@ -1,3 +1,5 @@
+//implement queue through linked list using double pointer
+
 #include <stdio.h>
 #include <stdlib.h>
 
