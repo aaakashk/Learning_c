@@ -7,11 +7,10 @@ typedef struct node {
     struct node* next;
 } nodetype;
 
-nodetype* create_p(nodetype*, int);
-nodetype* create_q(nodetype*, int);
-void display_p(nodetype*);
-void display_q(nodetype*);
+nodetype* create_list(nodetype*, int);
+void display(nodetype*);
 void display_same_data(nodetype*, nodetype*);
+
 int main() {
     nodetype *p_head = NULL, *q_head = NULL;
     int number1, number2, n;
@@ -21,10 +20,10 @@ int main() {
     for (int i = 0; i < n; i++) {
         printf("Enter the number: ");
         scanf("%d", &number1);
-        p_head = create_p(p_head, number1);
+        p_head = create_list(p_head, number1);
     }
     printf("P: ");
-    display_p(p_head);
+    display(p_head);
 
     printf("Enter the number of nodes of q list.");
     scanf("%d", &n);
@@ -32,16 +31,16 @@ int main() {
     for (int i = 0; i < n; i++) {
         printf("Enter the number: ");
         scanf("%d", &number2);
-        q_head = create_q(q_head, number2);
+        q_head = create_list(q_head, number2);
     }
     printf("Q: ");
-    display_q(q_head);
+    display(q_head);
 
     printf("=========================================\n");
     display_same_data(p_head, q_head);
 }
 
-nodetype* create_p(nodetype* start, int num) {
+nodetype* create_list(nodetype* start, int num) {
     nodetype* ptr = (nodetype*)malloc(sizeof(nodetype));
     ptr->data = num;
     ptr->next = NULL;
@@ -56,30 +55,7 @@ nodetype* create_p(nodetype* start, int num) {
     return start;
 }
 
-nodetype* create_q(nodetype* start, int num) {
-    nodetype* ptr = (nodetype*)malloc(sizeof(nodetype));
-    ptr->data = num;
-    ptr->next = NULL;
-    if (start == NULL)
-        start = ptr;
-    else {
-        nodetype* temp = start;
-        while (temp->next != NULL)
-            temp = temp->next;
-        temp->next = ptr;
-    }
-    return start;
-}
-
-void display_p(nodetype* start) {
-    while (start != NULL) {
-        printf("%d ", start->data);
-        start = start->next;
-    }
-    printf("\n");
-}
-
-void display_q(nodetype* start) {
+void display(nodetype* start) {
     while (start != NULL) {
         printf("%d ", start->data);
         start = start->next;
