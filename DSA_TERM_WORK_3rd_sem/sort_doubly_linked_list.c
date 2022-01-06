@@ -1,3 +1,5 @@
+//create a doubly linked list and sort the list (nodes) in ascending order
+
 #include <stdio.h>
 #include <stdlib.h>
 
