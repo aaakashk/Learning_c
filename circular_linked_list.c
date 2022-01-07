@@ -59,9 +59,9 @@ nodetype* insert(nodetype* tail) {
 
 void display(nodetype* tail) {
     nodetype* start = tail->next;
-    while (start != tail) {
+    do {
         printf("%d ", start->data);
         start = start->next;
-    }
+    } while (start != tail->next);
     printf("\n");
 }
