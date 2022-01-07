@@ -8,15 +8,17 @@ typedef struct node {
 
 nodetype* insert(nodetype*);
 void display(nodetype*);
+nodetype* delete (nodetype*, int);
 
 int main() {
     nodetype* last = NULL;
-    int choice;
+    int choice, number;
     do {
         printf(
             "1. Insert a number.\n"
-            "2. Display the list.\n"
-            "3. Exit.\n"
+            "2. Delete a node.\n"
+            "3. Display the list.\n"
+            "4. Exit.\n"
             "Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -25,11 +27,19 @@ int main() {
                 break;
             case 2:
                 if (last == NULL)
+                    printf("The list is empty. Nothing to delete.\n");
+                else {
+                    printf("Enter the number to delete: ");
+                    scanf("%d", &number);
+                    last = delete (last, number);
+                }
+            case 3:
+                if (last == NULL)
                     printf("The list is empty.\n");
                 else
                     display(last);
                 break;
-            case 3:
+            case 4:
                 exit(0);
             default:
                 printf("Wrong option. Enter again.\n");
@@ -64,4 +74,25 @@ void display(nodetype* tail) {
         start = start->next;
     } while (start != tail->next);
     printf("\n");
+}
+
+nodetype* delete (nodetype* tail, int num) {
+    nodetype* ptr = tail->next;
+    if (num == ptr->data)
+        tail->next = ptr->next;
+    else {
+        nodetype* t = ptr;
+        while (ptr->data != num && ptr->next != tail->next->next) {
+            t = ptr;
+            ptr = ptr->next;
+        }
+        if (ptr->data == num) {
+            //if(num == tail->data)
+            //    tail = t;
+            //else
+            t->next = ptr->next;
+        }
+    }
+    free(ptr);
+    return tail;
 }
