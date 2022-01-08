@@ -33,6 +33,7 @@ int main() {
                     scanf("%d", &number);
                     last = delete (last, number);
                 }
+                break;
             case 3:
                 if (last == NULL)
                     printf("The list is empty.\n");
@@ -78,21 +79,33 @@ void display(nodetype* tail) {
 
 nodetype* delete (nodetype* tail, int num) {
     nodetype* ptr = tail->next;
-    if (num == ptr->data)
-        tail->next = ptr->next;
-    else {
-        nodetype* t = ptr;
-        while (ptr->data != num && ptr->next != tail->next->next) {
-            t = ptr;
-            ptr = ptr->next;
-        }
+    //single node list and number found
+    if (num == ptr->data && tail->next == tail) {
+        tail = NULL;
+    } else {
+        //number found in the first node
         if (ptr->data == num) {
-            //if(num == tail->data)
-            //    tail = t;
-            //else
-            t->next = ptr->next;
+            tail->next = ptr->next;
+            printf("multiple nodes detected.\n");
+        } else {
+            nodetype* t = ptr;
+
+            do {
+                t = ptr;          //t points to previous node
+                ptr = ptr->next;  //ptr points to current node
+            } while (ptr->data != num && ptr != tail->next);
+            if (ptr->data != num)
+                printf("Number not found.\n");
+            else {
+                //number found in last node
+                if (ptr == tail) {
+                    t->next = tail->next;
+                    tail = t;
+                } else  //number found in between
+                    t->next = ptr->next;
+            }
         }
+        free(ptr);
     }
-    free(ptr);
     return tail;
 }
