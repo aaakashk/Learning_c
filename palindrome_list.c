@@ -73,7 +73,6 @@ void display(nodetype* start) {
 }
 
 void check_palindrome(nodetype* start) {
-    nodetype* t1 = start;
     nodetype* c = start;  //a pointer to count
     int flag = 1;
     int count = 0;
@@ -81,21 +80,16 @@ void check_palindrome(nodetype* start) {
         count++;
         c = c->next;
     }
-    printf("Count = %d\n", count);
-    int i = 0;
-    while (i < count / 2) {
-        int j = 0;
-        nodetype* t2 = start;
-        while (j < count - 1 - i) {
+    nodetype* t1 = start;  //a pointer for the first half
+    for (int i = 0; i < count / 2; i++) {
+        nodetype* t2 = start;  //a pointer for the second half
+        for (int j = 0; j < count - 1 - i; j++)
             t2 = t2->next;
-            j++;
-        }
         if (t1->data != t2->data) {
             flag = 0;
             break;
         }
         t1 = t1->next;
-        i++;
     }
     if (flag == 1)
         printf("The list is palindrome.\n");
