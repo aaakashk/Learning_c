@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -7,11 +8,12 @@ typedef struct node {
 } nodetype;
 
 nodetype* insert(nodetype*);
-void check_palindrome(nodetype*);
+bool check_palindrome(nodetype*);
 void display(nodetype*);
 
 int main() {
     nodetype* start = NULL;
+    bool is_palindrome;
     int choice;
     do {
         printf(
@@ -26,7 +28,11 @@ int main() {
                 start = insert(start);
                 break;
             case 2:
-                check_palindrome(start);
+                is_palindrome = check_palindrome(start);
+                if (is_palindrome)
+                    printf("THE LIST IS PALINDROME.\n");
+                else
+                    printf("THE LIST IS NOT PALINDROME.\n");
                 break;
             case 3:
                 if (start == NULL)
@@ -72,9 +78,8 @@ void display(nodetype* start) {
     printf("NULL\n");
 }
 
-void check_palindrome(nodetype* start) {
+bool check_palindrome(nodetype* start) {
     nodetype* c = start;  //a pointer to count
-    int flag = 1;
     int count = 0;
     while (c != NULL) {
         count++;
@@ -86,13 +91,9 @@ void check_palindrome(nodetype* start) {
         for (int j = 0; j < count - 1 - i; j++)
             t2 = t2->next;
         if (t1->data != t2->data) {
-            flag = 0;
-            break;
+            return false;
         }
         t1 = t1->next;
     }
-    if (flag == 1)
-        printf("The list is palindrome.\n");
-    else
-        printf("The list is not palindrome.\n");
+    return true;
 }
