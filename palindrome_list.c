@@ -66,19 +66,20 @@ nodetype* insert(nodetype* start) {
 
 void display(nodetype* start) {
     while (start != NULL) {
-        printf("%d ", start->data);
+        printf("%d->", start->data);
         start = start->next;
     }
-    printf("\n");
+    printf("NULL\n");
 }
 
 void check_palindrome(nodetype* start) {
     nodetype* t1 = start;
+    nodetype* c = start;  //a pointer to count
     int flag = 1;
     int count = 0;
-    while (start != NULL) {
+    while (c != NULL) {
         count++;
-        start = start->next;
+        c = c->next;
     }
     printf("Count = %d\n", count);
     int i = 0;
