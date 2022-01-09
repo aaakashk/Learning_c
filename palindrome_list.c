@@ -25,6 +25,9 @@ int main() {
             case 1:
                 start = insert(start);
                 break;
+            case 2:
+                check_palindrome(start);
+                break;
             case 3:
                 if (start == NULL)
                     printf("The list is empty.\n");
@@ -70,33 +73,31 @@ void display(nodetype* start) {
 }
 
 void check_palindrome(nodetype* start) {
-    nodetype* t1 = NULL;
+    nodetype* t1 = start;
     int flag = 1;
     int count = 0;
     while (start != NULL) {
         count++;
         start = start->next;
     }
+    printf("Count = %d\n", count);
     int i = 0;
     while (i < count / 2) {
-        if (t1 == NULL) {
-            printf("oyayay.");
-        } else
-            t1 = t1->next;
         int j = 0;
         nodetype* t2 = start;
-        while (j < count - i) {
+        while (j < count - 1 - i) {
             t2 = t2->next;
             j++;
         }
-        if (t1->data != t2->data)
+        if (t1->data != t2->data) {
             flag = 0;
+            break;
+        }
+        t1 = t1->next;
         i++;
     }
     if (flag == 1)
         printf("The list is palindrome.\n");
     else
         printf("The list is not palindrome.\n");
-    //int j = 0;
-    //while(j < count)
 }
