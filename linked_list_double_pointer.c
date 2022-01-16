@@ -9,6 +9,7 @@ typedef struct node {
 void insert(nodetype**);
 void delete (nodetype**, int);
 void display(nodetype*);
+nodetype* reverse_list(nodetype*);
 
 int main() {
     nodetype* start = NULL;
@@ -18,7 +19,8 @@ int main() {
             "1. Insert a number.\n"
             "2. Delete a number.\n"
             "3. Display the list.\n"
-            "4. Exit.\n"
+            "4. Reverse the list.\n"
+            "5. Exit.\n"
             "Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
@@ -41,6 +43,11 @@ int main() {
                     display(start);
                 break;
             case 4:
+                start = reverse_list(start);
+                printf("The list is now reversed.\n");
+                display(start);  //optional function call
+                break;
+            case 5:
                 exit(0);
             default:
                 printf("Wrong choice. Enter again.\n");
@@ -104,4 +111,17 @@ void display(nodetype* h) {
     }
     printf("\n");
     printf("-------------------------------------------\n");
+}
+
+//reverses the singly linked list
+nodetype* reverse_list(nodetype* current) {
+    nodetype* prev = NULL;
+    nodetype* _next = NULL;
+    while (current != NULL) {
+        _next = current->next;
+        current->next = prev;
+        prev = current;
+        current = _next;
+    }
+    return prev;
 }
