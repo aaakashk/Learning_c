@@ -58,26 +58,16 @@ void push(nodetype** top) {
     if (ptr == NULL)
         printf("Not enough memory.\n");
     else {
-        int num;
         printf("Enter the number: ");
-        scanf("%d", &num);
-        ptr->data = num;
-        ptr->next = NULL;
-        if (*top == NULL)
-            *top = ptr;
-        else {
-            ptr->next = *top;
-            *top = ptr;
-        }
+        scanf("%d", &ptr->data);
+        ptr->next = *top;
+        *top = ptr;
     }
 }
 
 void pop(nodetype** top) {
     nodetype* temp = *top;
-    if ((*top)->next == NULL)
-        *top = NULL;
-    else
-        *top = (*top)->next;
+    *top = (*top)->next;
     printf("Deleted: %d\n", temp->data);
     free(temp);
 }
