@@ -8,5 +8,8 @@ typedef struct node {
 } treetype;
 
 void _insert(treetype**, int);
+void _preorder_traversal(treetype*);
+void _inorder_traversal(treetype*);
+void _postorder_traversal(treetype*);
 
 #endif

@@ -1,6 +1,7 @@
 #ifndef _TREES_H
 #define _TREES_H
 
+#include <stdio.h>
 #include <stdlib.h>
 typedef struct node {
     int data;
@@ -21,6 +22,30 @@ void _insert(treetype** root, int num) {
         if (num > (*root)->data)
             _insert(&(*root)->right, num);
     }
+}
+
+void _preorder_traversal(treetype* root) {
+    if (root == NULL)
+        return;
+    printf("%d ", root->data);
+    _preorder_traversal(root->left);
+    _preorder_traversal(root->right);
+}
+
+void _inorder_traversal(treetype* root) {
+    if (root == NULL)
+        return;
+    _inorder_traversal(root->left);
+    printf("%d ", root->data);
+    _inorder_traversal(root->right);
+}
+
+void _postorder_traversal(treetype* root) {
+    if (root == NULL)
+        return;
+    _postorder_traversal(root->left);
+    _postorder_traversal(root->right);
+    printf("%d ", root->data);
 }
 
 #endif
