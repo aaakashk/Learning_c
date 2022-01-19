@@ -2,11 +2,6 @@
 #include <stdlib.h>
 
 #include "binary_search_tree.h"
-// typedef struct node {
-//     int data;
-//     struct node* left;
-//     struct node* right;
-// } treetype;
 
 void preorder_traversal(treetype*);
 void inorder_traversal(treetype*);
@@ -15,7 +10,6 @@ int countLeafNodes(treetype*);
 int count_nodes(treetype*);
 int countOneNode(treetype*);
 int countLeftChild(treetype*);
-// void insert_node(treetype**, int);
 
 int main() {
     treetype* root = NULL;
@@ -101,18 +95,3 @@ int countLeftChild(treetype* root) {
     }
     return countLeftChild(root->left) + countLeftChild(root->right);
 }
-
-// void insert_node(treetype** root, int num) {
-//     if (*root == NULL) {
-//         treetype* new_node = malloc(sizeof(treetype));
-//         new_node->data = num;
-//         new_node->left = NULL;
-//         new_node->right = NULL;
-//         *root = new_node;
-//     } else {
-//         if (num < (*root)->data)
-//             insert_node(&(*root)->left, num);
-//         if (num > (*root)->data)
-//             insert_node(&(*root)->right, num);
-//     }
-// }
