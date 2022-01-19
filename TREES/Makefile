@@ -1,17 +1,17 @@
 CC = gcc
 CFLAGS =-g -Wall
 
-all: test
+all: first
 
-test: test_header_file.o header_file.o
+first: binary_search_tree.o first_tree_program.o
 	${CC} ${CFLAGS} $^ -o $@
 
-test_header_file.o: test_header_file.c
+first_tree_program.o: first_tree_program.c
 	${CC} ${CFLAGS} -c $^
 
-header_file.o: header_file.h header_file.c
+binary_search_tree.o: binary_search_tree.h binary_search_tree.c
 	${CC} ${CFLAGS} -c $^
 
 clean:
-	rm *.o test
+	rm *.o first binary_search_tree.h.gch
 
