@@ -1,11 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node {
-    int data;
-    struct node* left;
-    struct node* right;
-} treetype;
+#include "binary_search_tree.h"
+// typedef struct node {
+//     int data;
+//     struct node* left;
+//     struct node* right;
+// } treetype;
 
 void preorder_traversal(treetype*);
 void inorder_traversal(treetype*);
@@ -14,24 +15,24 @@ int countLeafNodes(treetype*);
 int count_nodes(treetype*);
 int countOneNode(treetype*);
 int countLeftChild(treetype*);
-void insert_node(treetype**, int);
+// void insert_node(treetype**, int);
 
 int main() {
     treetype* root = NULL;
-    insert_node(&root, 50);
-    insert_node(&root, 30);
-    insert_node(&root, 60);
-    insert_node(&root, 40);
-    insert_node(&root, 20);
-    insert_node(&root, 70);
-    insert_node(&root, 10);
-    insert_node(&root, 25);
-    insert_node(&root, 45);
-    insert_node(&root, 65);
-    insert_node(&root, 8);
-    insert_node(&root, 9);
-    insert_node(&root, 62);
-    insert_node(&root, 67);
+    _insert(&root, 50);
+    _insert(&root, 30);
+    _insert(&root, 60);
+    _insert(&root, 40);
+    _insert(&root, 20);
+    _insert(&root, 70);
+    _insert(&root, 10);
+    _insert(&root, 25);
+    _insert(&root, 45);
+    _insert(&root, 65);
+    _insert(&root, 8);
+    _insert(&root, 9);
+    _insert(&root, 62);
+    _insert(&root, 67);
 
     preorder_traversal(root);
     printf("\n");
@@ -101,17 +102,17 @@ int countLeftChild(treetype* root) {
     return countLeftChild(root->left) + countLeftChild(root->right);
 }
 
-void insert_node(treetype** root, int num) {
-    if (*root == NULL) {
-        treetype* new_node = malloc(sizeof(treetype));
-        new_node->data = num;
-        new_node->left = NULL;
-        new_node->right = NULL;
-        *root = new_node;
-    } else {
-        if (num < (*root)->data)
-            insert_node(&(*root)->left, num);
-        if (num > (*root)->data)
-            insert_node(&(*root)->right, num);
-    }
-}
+// void insert_node(treetype** root, int num) {
+//     if (*root == NULL) {
+//         treetype* new_node = malloc(sizeof(treetype));
+//         new_node->data = num;
+//         new_node->left = NULL;
+//         new_node->right = NULL;
+//         *root = new_node;
+//     } else {
+//         if (num < (*root)->data)
+//             insert_node(&(*root)->left, num);
+//         if (num > (*root)->data)
+//             insert_node(&(*root)->right, num);
+//     }
+// }
