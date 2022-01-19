@@ -3,9 +3,6 @@
 
 #include "binary_search_tree.h"
 
-// void preorder_traversal(treetype*);
-// void inorder_traversal(treetype*);
-// void postorder_traversal(treetype*);
 int countLeafNodes(treetype*);
 int count_nodes(treetype*);
 int countOneNode(treetype*);
@@ -39,30 +36,6 @@ int main() {
     c = countLeftChild(root);
     printf("Left children = %d\n", c);
 }
-
-// void preorder_traversal(treetype* root) {
-//     if (root == NULL)
-//         return;
-//     printf("%d ", root->data);
-//     preorder_traversal(root->left);
-//     preorder_traversal(root->right);
-// }
-
-// void inorder_traversal(treetype* root) {
-//     if (root == NULL)
-//         return;
-//     inorder_traversal(root->left);
-//     printf("%d ", root->data);
-//     inorder_traversal(root->right);
-// }
-
-// void postorder_traversal(treetype* root) {
-//     if (root == NULL)
-//         return;
-//     postorder_traversal(root->left);
-//     postorder_traversal(root->right);
-//     printf("%d ", root->data);
-// }
 
 int countLeafNodes(treetype* root) {
     if (root == NULL)
