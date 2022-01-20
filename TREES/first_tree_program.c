@@ -4,14 +4,14 @@
 
 #include "binary_search_tree.h"
 
-int leafNodes(treetype*);
 int count_nodes(treetype*);
-int countOneNode(treetype*);
+int leafNodes(treetype*);
 int onlyLeftChild(treetype*);
+int bothChildren(treetype*);
+int singleChild(treetype*);
 // void search(treetype*, int, int*);
 bool search(treetype*, int);
 int printParent(treetype*, int);
-int bothChildren(treetype*);
 
 int main() {
     treetype* root = NULL;
@@ -32,12 +32,12 @@ int main() {
 
     _preorder_traversal(root);
     printf("\n");
-    // c = countOneNode(root);
-    // printf("Only a single child = %d\n", c);
+    int c = singleChild(root);
+    printf("Nodes with a single child = %d\n", c);
     // int p = printParent(root, 67);
     // printf("Parent : %d", p);
 }
-
+//returns total number of nodes
 int count_nodes(treetype* root) {
     if (!root)
         return 0;
@@ -69,8 +69,16 @@ int bothChildren(treetype* root) {
         c = 1;
     return c + bothChildren(root->left) + bothChildren(root->right);
 }
-//returns total number of nodes that have a single child, either left or right but not both
-int countOneNode(treetype* root) {
+//returns total number of nodes that have a single child, either left or right but NOT both
+int singleChild(treetype* root) {
+    int c = 0;
+    if (!root)
+        return 0;
+    if (root->left && !(root->right))  //node has only left child
+        c = 1;
+    else if (!(root->left) && root->right)  //node has only right child
+        c = 1;
+    return c + singleChild(root->left) + singleChild(root->right);
 }
 
 // void search(treetype* root, int num, int* is_present) {
