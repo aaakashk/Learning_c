@@ -12,6 +12,7 @@ int singleChild(treetype*);
 // void search(treetype*, int, int*);
 bool search(treetype*, int);
 void printParent(treetype*, int);
+treetype* delete_node(treetype*, int);
 
 int main() {
     treetype* root = NULL;
@@ -20,6 +21,7 @@ int main() {
     _insert(&root, 60);
     _insert(&root, 20);
     _insert(&root, 40);
+    _insert(&root, 42);
     _insert(&root, 45);
     _insert(&root, 25);
     _insert(&root, 10);
@@ -32,7 +34,9 @@ int main() {
 
     _preorder_traversal(root);
     printf("\n");
-    printParent(root, 9);
+    root = delete_node(root, 30);
+    _preorder_traversal(root);
+    printf("\n");
 }
 //returns total number of nodes
 int count_nodes(treetype* root) {
@@ -124,4 +128,46 @@ void printParent(treetype* root, int num) {
         printParent(root->right, num);
     else
         printf("Number is the ROOT. So, no parent.\n");
+}
+
+treetype* delete_node(treetype* root, int num) {
+    if (!root) {
+        printf("Number not found.\n");
+        return NULL;
+    } else if (num < root->data)
+        root->left = delete_node(root->left, num);
+    else if (num > root->data)
+        root->right = delete_node(root->right, num);
+    else  //number found
+    {
+        //case 1: no child
+        if (!root->left && !root->right) {
+            printf("no child triggered.\n");
+            free(root);
+            root = NULL;
+        }
+        //case 2: single child, either left or right
+        //right child
+        else if (!(root->left)) {
+            treetype* temp = root;
+            root = root->right;
+            free(temp);
+        }
+        //left child
+        else if (!(root->right)) {
+            treetype* temp = root;
+            root = root->left;
+            free(temp);
+        }
+        //case 3: both children
+        else {
+            treetype* temp = root->right;
+            //loop returns the pointer to inorder successor of the root
+            while (temp->left != NULL)
+                temp = temp->left;
+            root->data = temp->data;
+            root->right = delete_node(root->right, temp->data);
+        }
+    }
+    return root;
 }
