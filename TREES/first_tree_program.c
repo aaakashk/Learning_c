@@ -11,7 +11,7 @@ int bothChildren(treetype*);
 int singleChild(treetype*);
 // void search(treetype*, int, int*);
 bool search(treetype*, int);
-int printParent(treetype*, int);
+void printParent(treetype*, int);
 
 int main() {
     treetype* root = NULL;
@@ -32,10 +32,7 @@ int main() {
 
     _preorder_traversal(root);
     printf("\n");
-    int c = singleChild(root);
-    printf("Nodes with a single child = %d\n", c);
-    // int p = printParent(root, 67);
-    // printf("Parent : %d", p);
+    printParent(root, 9);
 }
 //returns total number of nodes
 int count_nodes(treetype* root) {
@@ -110,18 +107,21 @@ bool search(treetype* root, int num) {
     }
 }
 
-int printParent(treetype* root, int num) {
-    int parent_num = 0;
-    printf("%d", root->data);
-    if (root == NULL)
-        return 0;
-    if (num == root->left->data || num == root->right->data) {
-        return parent_num;
-    } else {
-        if (num < root->data)
-            parent_num = printParent(root->left, num);
-        else if (num > root->data)
-            parent_num = printParent(root->right, num);
-        return parent_num;
+void printParent(treetype* root, int num) {
+    if (root == NULL) {
+        printf("Number not found.\n");
+        return;
     }
+    if (root->left && root->left->data == num) {
+        printf("Parent node = %d\n", root->data);
+        return;
+    } else if (root->right && root->right->data == num) {
+        printf("Parent node = %d\n", root->data);
+        return;
+    } else if (num < root->data)
+        printParent(root->left, num);
+    else if (num > root->data)
+        printParent(root->right, num);
+    else
+        printf("Number is the ROOT. So, no parent.\n");
 }
