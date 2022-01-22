@@ -3,15 +3,15 @@ CFLAGS =-g -Wall
 
 all: first
 
-first: binary_search_tree.o first_tree_program.o
+first: binary_search_tree.o basic_functions_bst.o
 	${CC} ${CFLAGS} $^ -o $@
 
-first_tree_program.o: first_tree_program.c
+basic_functions_bst.o: basic_functions_bst.c
 	${CC} ${CFLAGS} -c $^
 
 binary_search_tree.o: binary_search_tree.h binary_search_tree.c
 	${CC} ${CFLAGS} -c $^
 
 clean:
-	rm *.o first binary_search_tree.h.gch
+	rm *.o first 
 
