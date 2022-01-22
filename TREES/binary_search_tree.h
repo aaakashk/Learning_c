@@ -11,5 +11,6 @@ void _insert(treetype**, int);
 void _preorder_traversal(treetype*);
 void _inorder_traversal(treetype*);
 void _postorder_traversal(treetype*);
+treetype* _delete(treetype*, int);
 
 #endif
